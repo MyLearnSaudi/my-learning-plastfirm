@@ -3,332 +3,330 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MyLearnSaudi | منصتي التعليمية</title>
+<title>منصتي التعليمية | MyLearnSaudi</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{box-sizing:border-box}
 
 body{
-  font-family:Arial,Tahoma,sans-serif;
-  background:#f4f7fb;
-  color:#172033;
+margin:0;
+font-family:Arial,Tahoma,sans-serif;
+background:#f5f7fb;
+color:#172033;
 }
 
 header{
-  background:linear-gradient(135deg,#172033,#315bea);
-  color:white;
-  padding:18px 6%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  position:sticky;
-  top:0;
-  z-index:1000;
-  box-shadow:0 5px 25px #0002;
+background:linear-gradient(135deg,#6c5ce7,#8e7dff);
+color:white;
+padding:18px 6%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+position:sticky;
+top:0;
+z-index:10;
 }
 
 .logo{
-  font-size:25px;
-  font-weight:bold;
-}
-
-nav{
-  display:flex;
-  gap:10px;
-  align-items:center;
+font-size:23px;
+font-weight:bold;
 }
 
 button{
-  border:0;
-  border-radius:12px;
-  padding:11px 17px;
-  cursor:pointer;
-  font-size:15px;
-  transition:.2s;
+border:0;
+border-radius:12px;
+padding:11px 16px;
+cursor:pointer;
+font-weight:bold;
 }
 
-button:hover{
-  transform:translateY(-2px);
+.btn{
+background:white;
+color:#5b4bc4;
 }
 
-.nav-btn{
-  background:#ffffff20;
-  color:white;
+.btn-primary{
+background:#6c5ce7;
+color:white;
 }
 
-.primary{
-  background:#315bea;
-  color:white;
+.btn-danger{
+background:#ffeceb;
+color:#d93025;
 }
 
-.danger{
-  background:#ef4444;
-  color:white;
-}
-
-.success{
-  background:#16a34a;
-  color:white;
+.container{
+width:92%;
+max-width:1150px;
+margin:auto;
 }
 
 .hero{
-  min-height:470px;
-  padding:70px 6%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:50px;
-  background:linear-gradient(135deg,#eef3ff,#ffffff);
+padding:70px 0;
 }
 
-.hero-text{
-  max-width:650px;
+.hero-box{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+align-items:center;
 }
 
 .hero h1{
-  font-size:48px;
-  margin-bottom:20px;
+font-size:48px;
+margin:0 0 20px;
 }
 
 .hero h1 span{
-  color:#315bea;
+color:#6c5ce7;
 }
 
 .hero p{
-  font-size:20px;
-  line-height:1.8;
-  color:#58657a;
-  margin-bottom:25px;
+font-size:18px;
+line-height:1.9;
+color:#667085;
 }
 
 .book{
-  width:240px;
-  height:300px;
-  background:linear-gradient(135deg,#315bea,#7c3aed);
-  border-radius:15px 30px 30px 15px;
-  box-shadow:25px 30px 50px #17203355;
-  transform:rotateY(-20deg) rotateX(8deg) rotateZ(3deg);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  font-size:30px;
-  font-weight:bold;
-  animation:float 3s ease-in-out infinite;
+height:300px;
+width:220px;
+margin:auto;
+border-radius:15px 25px 25px 15px;
+background:linear-gradient(135deg,#6c5ce7,#a18cff);
+box-shadow:-25px 25px 50px #aaa;
+transform:rotate(-8deg);
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:28px;
+font-weight:bold;
+text-align:center;
 }
 
-@keyframes float{
-  0%,100%{transform:rotateY(-20deg) rotateX(8deg) translateY(0)}
-  50%{transform:rotateY(-20deg) rotateX(8deg) translateY(-15px)}
-}
-
-section{
-  padding:60px 6%;
+.section{
+padding:30px 0 70px;
 }
 
 .section-title{
-  text-align:center;
-  font-size:32px;
-  margin-bottom:35px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+margin-bottom:25px;
+}
+
+.section-title h2{
+font-size:30px;
 }
 
 .search{
-  width:100%;
-  max-width:700px;
-  display:block;
-  margin:0 auto 35px;
-  padding:17px 20px;
-  border:1px solid #ddd;
-  border-radius:15px;
-  font-size:17px;
-  outline:none;
+padding:13px;
+border:1px solid #ddd;
+border-radius:12px;
+width:300px;
 }
 
-.courses{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:22px;
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
 }
 
 .card{
-  background:white;
-  border-radius:20px;
-  padding:25px;
-  box-shadow:0 10px 30px #17203312;
-  transition:.3s;
-}
-
-.card:hover{
-  transform:translateY(-7px);
-  box-shadow:0 20px 40px #17203320;
-}
-
-.card-icon{
-  font-size:45px;
-  margin-bottom:15px;
+background:white;
+padding:22px;
+border-radius:20px;
+box-shadow:0 10px 30px #00000010;
+border:1px solid #eee;
 }
 
 .card h3{
-  font-size:22px;
-  margin-bottom:10px;
+margin-top:10px;
 }
 
 .card p{
-  color:#687386;
-  line-height:1.7;
-  margin-bottom:18px;
+color:#667085;
+line-height:1.7;
 }
 
-.empty{
-  text-align:center;
-  padding:50px;
-  color:#777;
+.icon{
+font-size:38px;
 }
 
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#0008;
-  z-index:2000;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-.modal-box{
-  background:white;
-  width:100%;
-  max-width:600px;
-  max-height:90vh;
-  overflow:auto;
-  border-radius:22px;
-  padding:30px;
-}
-
-.modal-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:25px;
-}
-
-.close{
-  background:#eee;
-  font-size:20px;
-}
-
-.form-group{
-  margin-bottom:18px;
-}
-
-.form-group label{
-  display:block;
-  margin-bottom:7px;
-  font-weight:bold;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select{
-  width:100%;
-  padding:13px;
-  border:1px solid #ddd;
-  border-radius:12px;
-  font-size:16px;
-}
-
-.form-group textarea{
-  min-height:110px;
-  resize:vertical;
+.hidden{
+display:none!important;
 }
 
 .admin{
-  display:none;
-  padding:40px 6%;
-  background:#eef2ff;
-  min-height:500px;
+padding:35px 0 80px;
 }
 
-.admin-box{
-  max-width:1000px;
-  margin:auto;
+.admin-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
 }
 
-.admin-top{
-  background:white;
-  padding:25px;
-  border-radius:20px;
-  margin-bottom:25px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  flex-wrap:wrap;
+.tabs{
+display:flex;
+gap:10px;
+margin-bottom:20px;
+flex-wrap:wrap;
 }
 
-.admin-list{
-  display:grid;
-  gap:15px;
+.tab{
+background:white;
+border:1px solid #ddd;
 }
 
-.admin-item{
-  background:white;
-  padding:20px;
-  border-radius:16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  flex-wrap:wrap;
+.tab.active{
+background:#6c5ce7;
+color:white;
+}
+
+.admin-grid{
+display:grid;
+grid-template-columns:350px 1fr;
+gap:20px;
+}
+
+.panel{
+background:white;
+border-radius:20px;
+padding:22px;
+box-shadow:0 10px 30px #00000010;
+}
+
+input,textarea,select{
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+border-radius:10px;
+margin-top:6px;
+font-family:inherit;
+}
+
+textarea{
+min-height:100px;
+resize:vertical;
+}
+
+.form-group{
+margin-bottom:14px;
+}
+
+.form-group label{
+font-weight:bold;
+}
+
+.list{
+display:grid;
+gap:10px;
+}
+
+.item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+padding:12px;
+border:1px solid #eee;
+border-radius:12px;
 }
 
 .actions{
-  display:flex;
-  gap:8px;
+display:flex;
+gap:5px;
 }
 
-.login{
-  display:none;
+.small{
+padding:7px 10px;
+}
+
+.modal{
+position:fixed;
+inset:0;
+background:#0008;
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:100;
+}
+
+.modal.show{
+display:flex;
+}
+
+.modal-box{
+background:white;
+width:100%;
+max-width:500px;
+border-radius:20px;
+padding:25px;
+max-height:90vh;
+overflow:auto;
+}
+
+.modal-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.close{
+background:#eee;
+font-size:20px;
+}
+
+.notice{
+background:#f0edff;
+color:#5748b8;
+padding:14px;
+border-radius:12px;
+margin-bottom:20px;
 }
 
 footer{
-  background:#172033;
-  color:white;
-  text-align:center;
-  padding:30px;
+background:#172033;
+color:white;
+padding:30px;
+text-align:center;
 }
 
-@media(max-width:700px){
-  .hero{
-    flex-direction:column;
-    text-align:center;
-    padding-top:45px;
-  }
+@media(max-width:850px){
+.hero-box,
+.admin-grid{
+grid-template-columns:1fr;
+}
 
-  .hero h1{
-    font-size:35px;
-  }
+.grid{
+grid-template-columns:repeat(2,1fr);
+}
 
-  .book{
-    width:190px;
-    height:240px;
-  }
+.hero h1{
+font-size:38px;
+}
+}
 
-  header{
-    padding:15px 4%;
-  }
+@media(max-width:550px){
+.grid{
+grid-template-columns:1fr;
+}
 
-  nav{
-    gap:5px;
-  }
+.search{
+width:100%;
+}
+
+.section-title{
+flex-direction:column;
+align-items:stretch;
+}
 }
 </style>
 </head>
@@ -336,781 +334,1140 @@ footer{
 <body>
 
 <header>
-  <div class="logo">📚 MyLearnSaudi</div>
+<div class="logo">📚 MyLearnSaudi</div>
 
-  <nav>
-    <button class="nav-btn" onclick="scrollToCourses()">المواد</button>
-    <button class="nav-btn" onclick="showLogin()">لوحة التحكم</button>
-    <button class="nav-btn" onclick="toggleLanguage()">English</button>
-  </nav>
+<div>
+<button class="btn" onclick="toggleLanguage()" id="langBtn">
+English
+</button>
+
+<button class="btn" onclick="openLogin()" id="loginBtn">
+🔐 دخول المشرف
+</button>
+
+<button class="btn hidden" onclick="showAdmin()" id="adminBtn">
+⚙️ لوحة التحكم
+</button>
+
+<button class="btn hidden" onclick="logout()" id="logoutBtn">
+خروج
+</button>
+</div>
 </header>
 
 <main id="studentSite">
 
 <section class="hero">
+<div class="container hero-box">
 
-  <div class="hero-text">
-    <h1>
-      تعلم بطريقة <span>أسهل</span>
-    </h1>
+<div>
+<h1>
+تعلّم واصنع
+<span>مستقبلك</span>
+</h1>
 
-    <p>
-      منصتك التعليمية للوصول إلى المواد والدروس والشروحات
-      بطريقة منظمة وسهلة.
-    </p>
+<p>
+منصتي التعليمية تجمع المقررات والوحدات والدروس
+في مكان واحد، مع لوحة تحكم سهلة لإدارة المحتوى.
+</p>
 
-    <button class="primary" onclick="scrollToCourses()">
-      🚀 ابدأ التعلم
-    </button>
-  </div>
+<button class="btn-primary"
+onclick="document.getElementById('courses').scrollIntoView()">
+🚀 ابدأ التعلم
+</button>
+</div>
 
-  <div class="book">
-    📖<br>
-    MyLearnSaudi
-  </div>
+<div class="book">
+MY<br>
+LEARN<br>
+SAUDI
+</div>
 
+</div>
 </section>
 
-<section id="coursesSection">
+<section class="section" id="courses">
+<div class="container">
 
-  <h2 class="section-title">
-    📚 المواد التعليمية
-  </h2>
+<div class="section-title">
+<h2>📚 المقررات</h2>
 
-  <input
-    id="search"
-    class="search"
-    placeholder="🔎 ابحث عن مادة..."
-    oninput="searchCourses()"
-  >
+<input
+class="search"
+id="search"
+placeholder="ابحث عن مقرر..."
+oninput="renderSubjects()">
+</div>
 
-  <div id="courses" class="courses">
-    <div class="empty">
-      جاري تحميل المواد...
-    </div>
-  </div>
+<div class="grid" id="subjectGrid">
+<div class="card">جاري تحميل المقررات...</div>
+</div>
 
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+<div class="section-title">
+<h2>✨ مميزات المنصة</h2>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<div class="icon">🎓</div>
+<h3>تعلم منظم</h3>
+<p>
+المواد مقسمة إلى وحدات ودروس ليسهل الوصول إليها.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🌐</div>
+<h3>عربي وإنجليزي</h3>
+<p>
+يمكن تغيير لغة واجهة الموقع بدون ترجمة محتوى الدروس تلقائيًا.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">⚙️</div>
+<h3>لوحة تحكم</h3>
+<p>
+إضافة وتعديل وحذف المواد والوحدات والدروس بسهولة.
+</p>
+</div>
+
+</div>
+</div>
 </section>
 
 </main>
 
-<!-- تسجيل الدخول -->
-
-<div id="loginModal" class="modal">
-
-  <div class="modal-box">
-
-    <div class="modal-head">
-      <h2>🔐 دخول لوحة التحكم</h2>
-
-      <button class="close" onclick="closeModal('loginModal')">
-        ×
-      </button>
-    </div>
-
-    <div class="form-group">
-      <label>البريد الإلكتروني</label>
-      <input id="email" type="email">
-    </div>
-
-    <div class="form-group">
-      <label>كلمة المرور</label>
-      <input id="password" type="password">
-    </div>
-
-    <button class="primary" onclick="login()">
-      دخول
-    </button>
-
-    <p id="loginMessage" style="margin-top:15px"></p>
-
-  </div>
-
-</div>
 
 <!-- لوحة التحكم -->
 
-<section id="adminPanel" class="admin">
+<section class="admin hidden" id="adminSite">
 
-  <div class="admin-box">
+<div class="container">
 
-    <div class="admin-top">
+<div class="admin-header">
 
-      <div>
-        <h2>⚙️ لوحة التحكم</h2>
-        <p>تحكم كامل بالمحتوى</p>
-      </div>
+<div>
+<h1>⚙️ لوحة التحكم</h1>
+<p>إدارة محتوى منصتك التعليمية</p>
+</div>
 
-      <div>
-        <button class="success" onclick="openAddSubject()">
-          ➕ إضافة مادة
-        </button>
-
-        <button class="danger" onclick="logout()">
-          تسجيل خروج
-        </button>
-      </div>
-
-    </div>
-
-    <div id="adminList" class="admin-list">
-      جاري التحميل...
-    </div>
-
-  </div>
-
-</section>
-
-<!-- إضافة / تعديل مادة -->
-
-<div id="subjectModal" class="modal">
-
-  <div class="modal-box">
-
-    <div class="modal-head">
-
-      <h2 id="subjectModalTitle">
-        ➕ إضافة مادة
-      </h2>
-
-      <button
-        class="close"
-        onclick="closeModal('subjectModal')">
-        ×
-      </button>
-
-    </div>
-
-    <input type="hidden" id="subjectId">
-
-    <div class="form-group">
-      <label>اسم المادة بالعربي</label>
-      <input id="nameAr" placeholder="مثال: الرياضيات">
-    </div>
-
-    <div class="form-group">
-      <label>اسم المادة بالإنجليزي</label>
-      <input id="nameEn" placeholder="Example: Mathematics">
-    </div>
-
-    <div class="form-group">
-      <label>وصف المادة بالعربي</label>
-      <textarea id="descriptionAr"></textarea>
-    </div>
-
-    <div class="form-group">
-      <label>وصف المادة بالإنجليزي</label>
-      <textarea id="descriptionEn"></textarea>
-    </div>
-
-    <button class="primary" onclick="saveSubject()">
-      💾 حفظ المادة
-    </button>
-
-  </div>
+<button onclick="hideAdmin()">
+← العودة للموقع
+</button>
 
 </div>
 
+<div class="notice">
+من هنا تستطيع إضافة وتعديل وحذف المواد والوحدات والدروس.
+</div>
+
+<div class="tabs">
+
+<button class="tab active"
+onclick="showTab('subjects',this)">
+📚 المواد
+</button>
+
+<button class="tab"
+onclick="showTab('units',this)">
+📦 الوحدات
+</button>
+
+<button class="tab"
+onclick="showTab('lessons',this)">
+📝 الدروس
+</button>
+
+</div>
+
+
+<!-- المواد -->
+
+<div id="subjectsTab" class="admin-grid">
+
+<div class="panel">
+
+<h2>➕ إضافة مادة</h2>
+
+<form onsubmit="saveSubject(event)">
+
+<div class="form-group">
+<label>اسم المادة بالعربي</label>
+<input id="subjectAr" required>
+</div>
+
+<div class="form-group">
+<label>اسم المادة بالإنجليزي</label>
+<input id="subjectEn" required>
+</div>
+
+<div class="form-group">
+<label>الوصف بالعربي</label>
+<textarea id="descriptionAr"></textarea>
+</div>
+
+<div class="form-group">
+<label>الوصف بالإنجليزي</label>
+<textarea id="descriptionEn"></textarea>
+</div>
+
+<div class="form-group">
+<label>رابط الصورة</label>
+<input id="imageUrl" type="url">
+</div>
+
+<button class="btn-primary" type="submit">
+➕ إضافة المادة
+</button>
+
+</form>
+
+</div>
+
+
+<div class="panel">
+
+<h2>المواد الحالية</h2>
+
+<div class="list" id="subjectsList"></div>
+
+</div>
+
+</div>
+
+
+<!-- الوحدات -->
+
+<div id="unitsTab" class="admin-grid hidden">
+
+<div class="panel">
+
+<h2>➕ إضافة وحدة</h2>
+
+<form onsubmit="saveUnit(event)">
+
+<div class="form-group">
+<label>المادة</label>
+<select id="unitSubject" required></select>
+</div>
+
+<div class="form-group">
+<label>اسم الوحدة بالعربي</label>
+<input id="unitAr" required>
+</div>
+
+<div class="form-group">
+<label>اسم الوحدة بالإنجليزي</label>
+<input id="unitEn" required>
+</div>
+
+<div class="form-group">
+<label>الوصف</label>
+<textarea id="unitDescription"></textarea>
+</div>
+
+<div class="form-group">
+<label>الترتيب</label>
+<input id="unitOrder" type="number" value="0">
+</div>
+
+<button class="btn-primary">
+➕ إضافة الوحدة
+</button>
+
+</form>
+
+</div>
+
+<div class="panel">
+
+<h2>الوحدات الحالية</h2>
+
+<div class="list" id="unitsList"></div>
+
+</div>
+
+</div>
+
+
+<!-- الدروس -->
+
+<div id="lessonsTab" class="admin-grid hidden">
+
+<div class="panel">
+
+<h2>➕ إضافة درس</h2>
+
+<form onsubmit="saveLesson(event)">
+
+<div class="form-group">
+<label>الوحدة</label>
+<select id="lessonUnit" required></select>
+</div>
+
+<div class="form-group">
+<label>عنوان الدرس بالعربي</label>
+<input id="lessonAr" required>
+</div>
+
+<div class="form-group">
+<label>عنوان الدرس بالإنجليزي</label>
+<input id="lessonEn" required>
+</div>
+
+<div class="form-group">
+<label>محتوى الدرس بالعربي</label>
+<textarea id="contentAr"></textarea>
+</div>
+
+<div class="form-group">
+<label>محتوى الدرس بالإنجليزي</label>
+<textarea id="contentEn"></textarea>
+</div>
+
+<div class="form-group">
+<label>رابط الفيديو</label>
+<input id="videoUrl" type="url">
+</div>
+
+<div class="form-group">
+<label>رابط الملف</label>
+<input id="fileUrl" type="url">
+</div>
+
+<div class="form-group">
+<label>الترتيب</label>
+<input id="lessonOrder" type="number" value="0">
+</div>
+
+<button class="btn-primary">
+➕ إضافة الدرس
+</button>
+
+</form>
+
+</div>
+
+<div class="panel">
+
+<h2>الدروس الحالية</h2>
+
+<div class="list" id="lessonsList"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
 <footer>
-  <p>© 2026 MyLearnSaudi - جميع الحقوق محفوظة</p>
+© 2026 MyLearnSaudi — منصتي التعليمية
 </footer>
+
+
+<!-- تسجيل الدخول -->
+
+<div class="modal" id="loginModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<h2>🔐 دخول المشرف</h2>
+
+<button class="close" onclick="closeLogin()">×</button>
+
+</div>
+
+<form onsubmit="login(event)">
+
+<div class="form-group">
+<label>البريد الإلكتروني</label>
+<input id="email" type="email" required>
+</div>
+
+<div class="form-group">
+<label>كلمة المرور</label>
+<input id="password" type="password" required>
+</div>
+
+<button class="btn-primary" type="submit">
+دخول
+</button>
+
+</form>
+
+</div>
+</div>
+
+
+<!-- تفاصيل المادة -->
+
+<div class="modal" id="courseModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<h2 id="courseTitle"></h2>
+
+<button class="close"
+onclick="closeCourse()">×</button>
+
+</div>
+
+<div id="courseContent"></div>
+
+</div>
+
+</div>
+
 
 <script>
 
-/* =====================================
-   إعداد Supabase
-===================================== */
+/* =========================================
+   SUPABASE
+========================================= */
 
-const SUPABASE_URL = "https://zvxcdjtmrwjtxwdydxmv.supabase.co";
+const SUPABASE_URL =
+"https://zvxcdjtmrwjtxwdydxmv.supabase.co";
 
-const SUPABASE_KEY = "sb_publishable_2YaZJQR3S3AfXIlA52dYMg__91CLvu4";
+const SUPABASE_KEY =
+"supabaseClient.auth";
 
 const supabaseClient =
-  supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
 
 
-/* =====================================
-   اللغة
-===================================== */
+/* =========================================
+   المتغيرات
+========================================= */
 
-let currentLanguage = "ar";
-
-function toggleLanguage(){
-
-  currentLanguage =
-    currentLanguage === "ar"
-      ? "en"
-      : "ar";
-
-  document.documentElement.lang =
-    currentLanguage;
-
-  document.documentElement.dir =
-    currentLanguage === "ar"
-      ? "rtl"
-      : "ltr";
-
-  renderCourses();
-}
+let subjects=[];
+let units=[];
+let lessons=[];
 
 
-/* =====================================
-   المواد
-===================================== */
+/* =========================================
+   تحميل البيانات
+========================================= */
 
-let subjects = [];
+async function loadData(){
 
-async function loadSubjects(){
+const subjectsResult =
+await supabaseClient
+.from("subjects")
+.select("*")
+.order("created_at",{ascending:false});
 
-  const { data, error } =
-    await supabaseClient
-      .from("subjects")
-      .select("*")
-      .order("id", { ascending:true });
+const unitsResult =
+await supabaseClient
+.from("units")
+.select("*")
+.order("sort_order");
 
-  if(error){
-
-    console.error(error);
-
-    document.getElementById("courses").innerHTML =
-      `
-      <div class="empty">
-        ⚠️ لم يتم الاتصال بقاعدة البيانات.
-      </div>
-      `;
-
-    return;
-  }
-
-  subjects = data || [];
-
-  renderCourses();
-}
+const lessonsResult =
+await supabaseClient
+.from("lessons")
+.select("*")
+.order("sort_order");
 
 
-function renderCourses(){
+if(!subjectsResult.error)
+subjects=subjectsResult.data||[];
 
-  const container =
-    document.getElementById("courses");
+if(!unitsResult.error)
+units=unitsResult.data||[];
 
-  if(subjects.length === 0){
-
-    container.innerHTML =
-      `
-      <div class="empty">
-        لا توجد مواد حالياً.
-      </div>
-      `;
-
-    return;
-  }
-
-  container.innerHTML =
-    subjects.map(subject => {
-
-      const name =
-        currentLanguage === "ar"
-          ? subject.name_ar
-          : subject.name_en;
-
-      const description =
-        currentLanguage === "ar"
-          ? subject.description_ar
-          : subject.description_en;
-
-      return `
-        <div class="card">
-
-          <div class="card-icon">
-            📚
-          </div>
-
-          <h3>${escapeHtml(name)}</h3>
-
-          <p>
-            ${escapeHtml(description || "")}
-          </p>
-
-          <button
-            class="primary"
-            onclick="openSubject(${subject.id})">
-            عرض المادة
-          </button>
-
-        </div>
-      `;
-
-    }).join("");
-}
+if(!lessonsResult.error)
+lessons=lessonsResult.data||[];
 
 
-/* =====================================
-   البحث
-===================================== */
-
-function searchCourses(){
-
-  const value =
-    document
-      .getElementById("search")
-      .value
-      .toLowerCase();
-
-  const filtered =
-    subjects.filter(subject => {
-
-      return (
-        subject.name_ar?.toLowerCase().includes(value) ||
-        subject.name_en?.toLowerCase().includes(value)
-      );
-
-    });
-
-  const container =
-    document.getElementById("courses");
-
-  container.innerHTML =
-    filtered.map(subject => {
-
-      const name =
-        currentLanguage === "ar"
-          ? subject.name_ar
-          : subject.name_en;
-
-      const description =
-        currentLanguage === "ar"
-          ? subject.description_ar
-          : subject.description_en;
-
-      return `
-        <div class="card">
-
-          <div class="card-icon">📚</div>
-
-          <h3>${escapeHtml(name)}</h3>
-
-          <p>${escapeHtml(description || "")}</p>
-
-          <button
-            class="primary"
-            onclick="openSubject(${subject.id})">
-            عرض المادة
-          </button>
-
-        </div>
-      `;
-
-    }).join("");
-}
-
-
-/* =====================================
-   تسجيل الدخول
-===================================== */
-
-function showLogin(){
-
-  document.getElementById("loginModal")
-    .style.display = "flex";
+renderSubjects();
+renderAdmin();
 
 }
 
-async function login(){
 
-  const email =
-    document.getElementById("email").value;
+/* =========================================
+   عرض المواد
+========================================= */
 
-  const password =
-    document.getElementById("password").value;
+function renderSubjects(){
 
-  const message =
-    document.getElementById("loginMessage");
+const grid=
+document.getElementById("subjectGrid");
 
-  const { data, error } =
-    await supabaseClient.auth.signInWithPassword({
-      email,
-      password
-    });
+const search=
+document.getElementById("search").value.toLowerCase();
 
-  if(error){
+const filtered=
+subjects.filter(s=>
+(s.name_ar+" "+s.name_en)
+.toLowerCase()
+.includes(search)
+);
 
-    message.style.color = "red";
-    message.textContent =
-      "❌ بيانات الدخول غير صحيحة";
 
-    return;
-  }
+if(filtered.length===0){
 
-  closeModal("loginModal");
+grid.innerHTML=
+`<div class="card">
+لا توجد مواد حاليًا.
+</div>`;
 
-  showAdmin();
+return;
 
 }
 
 
-/* =====================================
-   لوحة التحكم
-===================================== */
+grid.innerHTML=
+filtered.map(s=>`
 
-async function showAdmin(){
+<div class="card">
 
-  document.getElementById("studentSite")
-    .style.display = "none";
+<div class="icon">
+${s.image_url
+?`<img src="${escapeHtml(s.image_url)}"
+style="width:60px;height:60px;object-fit:cover;border-radius:12px">`
+:"📚"}
+</div>
 
-  document.getElementById("adminPanel")
-    .style.display = "block";
+<h3>${escapeHtml(s.name_ar)}</h3>
 
-  await loadAdminSubjects();
+<p>
+${escapeHtml(s.description_ar||"")}
+</p>
+
+<button
+class="btn-primary"
+onclick="openCourse(${s.id})">
+
+فتح المادة →
+
+</button>
+
+</div>
+
+`).join("");
 
 }
 
 
-async function loadAdminSubjects(){
-
-  const { data, error } =
-    await supabaseClient
-      .from("subjects")
-      .select("*")
-      .order("id");
-
-  if(error){
-
-    document.getElementById("adminList").innerHTML =
-      "حدث خطأ في تحميل المواد";
-
-    return;
-  }
-
-  const list =
-    document.getElementById("adminList");
-
-  if(!data || data.length === 0){
-
-    list.innerHTML =
-      `
-      <div class="admin-item">
-        لا توجد مواد. أضف أول مادة الآن.
-      </div>
-      `;
-
-    return;
-  }
-
-  list.innerHTML =
-    data.map(subject => {
-
-      return `
-        <div class="admin-item">
-
-          <div>
-            <strong>
-              ${escapeHtml(subject.name_ar)}
-            </strong>
-
-            <p>
-              ${escapeHtml(subject.name_en)}
-            </p>
-          </div>
-
-          <div class="actions">
-
-            <button
-              class="primary"
-              onclick="editSubject(${subject.id})">
-              ✏️ تعديل
-            </button>
-
-            <button
-              class="danger"
-              onclick="deleteSubject(${subject.id})">
-              🗑️ حذف
-            </button>
-
-          </div>
-
-        </div>
-      `;
-
-    }).join("");
-}
-
-
-/* =====================================
-   إضافة مادة
-===================================== */
-
-function openAddSubject(){
-
-  document.getElementById("subjectModalTitle")
-    .textContent = "➕ إضافة مادة";
-
-  document.getElementById("subjectId").value = "";
-
-  document.getElementById("nameAr").value = "";
-
-  document.getElementById("nameEn").value = "";
-
-  document.getElementById("descriptionAr").value = "";
-
-  document.getElementById("descriptionEn").value = "";
-
-  document.getElementById("subjectModal")
-    .style.display = "flex";
-}
-
-
-/* =====================================
-   تعديل مادة
-===================================== */
-
-async function editSubject(id){
-
-  const subject =
-    subjects.find(s => s.id === id);
-
-  let current = subject;
-
-  if(!current){
-
-    const { data } =
-      await supabaseClient
-        .from("subjects")
-        .select("*")
-        .eq("id", id)
-        .single();
-
-    current = data;
-  }
-
-  if(!current) return;
-
-  document.getElementById("subjectModalTitle")
-    .textContent = "✏️ تعديل المادة";
-
-  document.getElementById("subjectId").value =
-    current.id;
-
-  document.getElementById("nameAr").value =
-    current.name_ar || "";
-
-  document.getElementById("nameEn").value =
-    current.name_en || "";
-
-  document.getElementById("descriptionAr").value =
-    current.description_ar || "";
-
-  document.getElementById("descriptionEn").value =
-    current.description_en || "";
-
-  document.getElementById("subjectModal")
-    .style.display = "flex";
-}
-
-
-/* =====================================
-   حفظ المادة
-===================================== */
-
-async function saveSubject(){
-
-  const id =
-    document.getElementById("subjectId").value;
-
-  const name_ar =
-    document.getElementById("nameAr").value.trim();
-
-  const name_en =
-    document.getElementById("nameEn").value.trim();
-
-  const description_ar =
-    document.getElementById("descriptionAr").value.trim();
-
-  const description_en =
-    document.getElementById("descriptionEn").value.trim();
-
-  if(!name_ar || !name_en){
-
-    alert("اكتب اسم المادة بالعربي والإنجليزي");
-
-    return;
-  }
-
-  let result;
-
-  if(id){
-
-    result =
-      await supabaseClient
-        .from("subjects")
-        .update({
-          name_ar,
-          name_en,
-          description_ar,
-          description_en
-        })
-        .eq("id", id);
-
-  }else{
-
-    result =
-      await supabaseClient
-        .from("subjects")
-        .insert({
-          name_ar,
-          name_en,
-          description_ar,
-          description_en
-        });
-
-  }
-
-  if(result.error){
-
-    alert(
-      "حدث خطأ: " +
-      result.error.message
-    );
-
-    return;
-  }
-
-  closeModal("subjectModal");
-
-  await loadSubjects();
-
-  await loadAdminSubjects();
-
-  alert("✅ تم حفظ المادة");
-
-}
-
-
-/* =====================================
-   حذف مادة
-===================================== */
-
-async function deleteSubject(id){
-
-  const ok =
-    confirm(
-      "هل أنت متأكد من حذف هذه المادة؟"
-    );
-
-  if(!ok) return;
-
-  const { error } =
-    await supabaseClient
-      .from("subjects")
-      .delete()
-      .eq("id", id);
-
-  if(error){
-
-    alert(
-      "❌ لم يتم الحذف: " +
-      error.message
-    );
-
-    return;
-  }
-
-  await loadSubjects();
-
-  await loadAdminSubjects();
-
-  alert("✅ تم حذف المادة");
-
-}
-
-
-/* =====================================
+/* =========================================
    فتح المادة
-===================================== */
+========================================= */
 
-function openSubject(id){
+function openCourse(id){
 
-  const subject =
-    subjects.find(s => s.id === id);
+const subject=
+subjects.find(s=>s.id===id);
 
-  if(!subject) return;
+if(!subject)return;
 
-  const name =
-    currentLanguage === "ar"
-      ? subject.name_ar
-      : subject.name_en;
 
-  const description =
-    currentLanguage === "ar"
-      ? subject.description_ar
-      : subject.description_en;
+const subjectUnits=
+units
+.filter(u=>u.subject_id===id)
+.sort((a,b)=>a.sort_order-b.sort_order);
 
-  alert(
-    name +
-    "\n\n" +
-    (description || "")
-  );
+
+document.getElementById("courseTitle")
+.textContent=subject.name_ar;
+
+
+let html=
+`<p>${escapeHtml(subject.description_ar||"")}</p>`;
+
+
+if(subjectUnits.length===0){
+
+html+=
+"<p>لا توجد وحدات لهذه المادة حتى الآن.</p>";
+
+}else{
+
+subjectUnits.forEach(unit=>{
+
+html+=`
+<div class="card" style="margin:12px 0">
+<h3>📦 ${escapeHtml(unit.name_ar)}</h3>
+`;
+
+const unitLessons=
+lessons
+.filter(l=>l.unit_id===unit.id)
+.sort((a,b)=>a.sort_order-b.sort_order);
+
+
+if(unitLessons.length===0){
+
+html+=
+"<p>لا توجد دروس بعد.</p>";
+
+}else{
+
+unitLessons.forEach(lesson=>{
+
+html+=`
+<div style="padding:12px;border-top:1px solid #eee">
+
+<b>📝 ${escapeHtml(lesson.title_ar)}</b>
+
+<p>
+${escapeHtml(lesson.content_ar||"")}
+</p>
+
+${lesson.video_url?
+`<a href="${escapeHtml(lesson.video_url)}"
+target="_blank">
+🎥 مشاهدة الفيديو
+</a>`:""}
+
+<br>
+
+${lesson.file_url?
+`<a href="${escapeHtml(lesson.file_url)}"
+target="_blank">
+📄 فتح الملف
+</a>`:""}
+
+</div>
+`;
+
+});
+
+}
+
+html+="</div>";
+
+});
 
 }
 
 
-/* =====================================
+document.getElementById("courseContent")
+.innerHTML=html;
+
+document.getElementById("courseModal")
+.classList.add("show");
+
+}
+
+
+function closeCourse(){
+
+document.getElementById("courseModal")
+.classList.remove("show");
+
+}
+
+
+/* =========================================
+   تسجيل الدخول
+========================================= */
+
+function openLogin(){
+
+document.getElementById("loginModal")
+.classList.add("show");
+
+}
+
+
+function closeLogin(){
+
+document.getElementById("loginModal")
+.classList.remove("show");
+
+}
+
+
+async function login(event){
+
+event.preventDefault();
+
+const email=
+document.getElementById("email").value;
+
+const password=
+document.getElementById("password").value;
+
+
+const {data,error}=
+await supabaseClient.auth
+.signInWithPassword({
+email,
+password
+});
+
+
+if(error){
+
+alert("بيانات الدخول غير صحيحة");
+
+return;
+
+}
+
+
+closeLogin();
+
+document.getElementById("loginBtn")
+.classList.add("hidden");
+
+document.getElementById("adminBtn")
+.classList.remove("hidden");
+
+document.getElementById("logoutBtn")
+.classList.remove("hidden");
+
+showAdmin();
+
+alert("تم تسجيل الدخول بنجاح");
+
+}
+
+
+/* =========================================
    تسجيل الخروج
-===================================== */
+========================================= */
 
 async function logout(){
 
-  await supabaseClient.auth.signOut();
+await supabaseClient.auth.signOut();
 
-  document.getElementById("adminPanel")
-    .style.display = "none";
+document.getElementById("loginBtn")
+.classList.remove("hidden");
 
-  document.getElementById("studentSite")
-    .style.display = "block";
+document.getElementById("adminBtn")
+.classList.add("hidden");
+
+document.getElementById("logoutBtn")
+.classList.add("hidden");
+
+hideAdmin();
+
+}
+
+
+/* =========================================
+   لوحة التحكم
+========================================= */
+
+function showAdmin(){
+
+document.getElementById("studentSite")
+.classList.add("hidden");
+
+document.getElementById("adminSite")
+.classList.remove("hidden");
+
+renderAdmin();
 
 }
 
 
-/* =====================================
-   أدوات
-===================================== */
+function hideAdmin(){
 
-function closeModal(id){
+document.getElementById("studentSite")
+.classList.remove("hidden");
 
-  document.getElementById(id)
-    .style.display = "none";
-
-}
-
-function scrollToCourses(){
-
-  document.getElementById("coursesSection")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
+document.getElementById("adminSite")
+.classList.add("hidden");
 
 }
 
-function escapeHtml(text){
 
-  const div =
-    document.createElement("div");
+/* =========================================
+   التبويبات
+========================================= */
 
-  div.textContent = text ?? "";
+function showTab(tab,button){
 
-  return div.innerHTML;
+document.getElementById("subjectsTab")
+.classList.add("hidden");
+
+document.getElementById("unitsTab")
+.classList.add("hidden");
+
+document.getElementById("lessonsTab")
+.classList.add("hidden");
+
+
+document.querySelectorAll(".tab")
+.forEach(b=>b.classList.remove("active"));
+
+button.classList.add("active");
+
+document.getElementById(tab+"Tab")
+.classList.remove("hidden");
+
 }
 
 
-/* =====================================
-   التشغيل
-===================================== */
+/* =========================================
+   إضافة مادة
+========================================= */
 
-loadSubjects();
+async function saveSubject(event){
 
-</script>
+event.preventDefault();
 
-</body>
-</html>
+
+const data={
+
+name_ar:
+document.getElementById("subjectAr").value,
+
+name_en:
+document.getElementById("subjectEn").value,
+
+description_ar:
+document.getElementById("descriptionAr").value,
+
+description_en:
+document.getElementById("descriptionEn").value,
+
+image_url:
+document.getElementById("imageUrl").value
+
+};
+
+
+const {error}=
+await supabaseClient
+.from("subjects")
+.insert(data);
+
+
+if(error){
+
+alert("حدث خطأ أثناء إضافة المادة");
+
+console.error(error);
+
+return;
+
+}
+
+
+event.target.reset();
+
+alert("تمت إضافة المادة بنجاح");
+
+await loadData();
+
+}
+
+
+/* =========================================
+   حذف مادة
+========================================= */
+
+async function deleteSubject(id){
+
+if(!confirm("هل تريد حذف المادة؟"))
+return;
+
+
+const {error}=
+await supabaseClient
+.from("subjects")
+.delete()
+.eq("id",id);
+
+
+if(error){
+
+alert("تعذر حذف المادة");
+
+return;
+
+}
+
+
+await loadData();
+
+}
+
+
+/* =========================================
+   إضافة وحدة
+========================================= */
+
+async function saveUnit(event){
+
+event.preventDefault();
+
+
+const data={
+
+subject_id:
+Number(document.getElementById("unitSubject").value),
+
+name_ar:
+document.getElementById("unitAr").value,
+
+name_en:
+document.getElementById("unitEn").value,
+
+description_ar:
+document.getElementById("unitDescription").value,
+
+description_en:
+document.getElementById("unitDescription").value,
+
+sort_order:
+Number(document.getElementById("unitOrder").value)||0
+
+};
+
+
+const {error}=
+await supabaseClient
+.from("units")
+.insert(data);
+
+
+if(error){
+
+alert("حدث خطأ أثناء إضافة الوحدة");
+
+return;
+
+}
+
+
+event.target.reset();
+
+alert("تمت إضافة الوحدة");
+
+await loadData();
+
+}
+
+
+/* =========================================
+   حذف وحدة
+========================================= */
+
+async function deleteUnit(id){
+
+if(!confirm("حذف الوحدة؟"))
+return;
+
+
+const {error}=
+await supabaseClient
+.from("units")
+.delete()
+.eq("id",id);
+
+
+if(error){
+
+alert("تعذر حذف الوحدة");
+
+return;
+
+}
+
+
+await loadData();
+
+}
+
+
+/* =========================================
+   إضافة درس
+========================================= */
+
+async function saveLesson(event){
+
+event.preventDefault();
+
+
+const data={
+
+unit_id:
+Number(document.getElementById("lessonUnit").value),
+
+title_ar:
+document.getElementById("lessonAr").value,
+
+title_en:
+document.getElementById("lessonEn").value,
+
+content_ar:
+document.getElementById("contentAr").value,
+
+content_en:
+document.getElementById("contentEn").value,
+
+video_url:
+document.getElementById("videoUrl").value,
+
+file_url:
+document.getElementById("fileUrl").value,
+
+sort_order:
+Number(document.getElementById("lessonOrder").value)||0
+
+};
+
+
+const {error}=
+await supabaseClient
+.from("lessons")
+.insert(data);
+
+
+if(error){
+
+alert("حدث خطأ أثناء إضافة الدرس");
+
+console.error(error);
+
+return;
+
+}
+
+
+event.target.reset();
+
+alert("تمت إضافة الدرس");
+
+await loadData();
+
+}
+
+
+/* =========================================
+   حذف درس
+========================================= */
+
+async function deleteLesson(id){
+
+if(!confirm("هل تريد حذف الدرس؟"))
+return;
+
+
+const {error}=
+await supabaseClient
+.from("lessons")
+.delete()
+.eq("id",id);
+
+
+if(error){
+
+alert("تعذر حذف الدرس");
+
+return;
+
+}
+
+
+await loadData();
+
+}
+
+
+/* =========================================
+   لوحة الإدارة
+========================================= */
+
+function renderAdmin(){
+
+const subjectList=
+document.getElementById("subjectsList");
+
+subjectList.innerHTML=
+subjects.map(s=>`
+
+<div class="item">
+
+<b>${escapeHtml(s.name_ar)}</b>
+
+<div class="actions">
+
+<button
+class="btn-danger small"
+onclick="deleteSubject(${s.id})">
+
+🗑️ حذف
+
+</button>
+
+</div>
+
+</div>
+
+`).join("");
+
+
+const unitList=
+document.getElementById("unitsList");
+
+unitList.innerHTML=
+units.map(u=>`
+
+<div class="item">
+
+<div>
+
+<b>${escapeHtml(u.name_ar)}</b>
+
+<small>
+<br>
+${escapeHtml(
+subjects.find(s=>s.id===u.subject_id)?.name_ar||""
+)}
+</small>
+
+</div>
+
+<button
+class="btn-danger small"
+onclick="deleteUnit(${u.id})">
+
+🗑️ حذف
+
+</button>
+
+</div>
+
+`).join("");
+
+
+const lessonList=
+document.getElementById("lessonsList");
+
+lessonList.innerHTML=
+lessons.map(l=>`
+
+<div class="item">
+
+<div>
+
+<b>${escapeHtml(l.title_ar)}</b>
+
+<small>
+<br>
+${escapeHtml(
+units.f
