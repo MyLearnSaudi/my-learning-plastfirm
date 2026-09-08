@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>منصتي التعليمية</title>
+<title>MyLearnSaudi | منصتي التعليمية</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{
@@ -14,65 +16,76 @@
 
 body{
   font-family:Arial,Tahoma,sans-serif;
-  background:#f5f7fb;
+  background:#f4f7fb;
   color:#172033;
-  transition:.3s;
 }
 
 header{
-  background:linear-gradient(135deg,#171c3a,#3949ab);
+  background:linear-gradient(135deg,#172033,#315bea);
   color:white;
   padding:18px 6%;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   gap:20px;
   position:sticky;
   top:0;
-  z-index:100;
+  z-index:1000;
+  box-shadow:0 5px 25px #0002;
 }
 
 .logo{
-  font-size:24px;
+  font-size:25px;
   font-weight:bold;
 }
 
 nav{
   display:flex;
-  gap:18px;
+  gap:10px;
   align-items:center;
-}
-
-nav a{
-  color:white;
-  text-decoration:none;
-  cursor:pointer;
 }
 
 button{
   border:0;
+  border-radius:12px;
+  padding:11px 17px;
   cursor:pointer;
   font-size:15px;
+  transition:.2s;
 }
 
-.lang-btn{
-  background:white;
-  color:#27348b;
-  padding:9px 15px;
-  border-radius:12px;
-  font-weight:bold;
+button:hover{
+  transform:translateY(-2px);
+}
+
+.nav-btn{
+  background:#ffffff20;
+  color:white;
+}
+
+.primary{
+  background:#315bea;
+  color:white;
+}
+
+.danger{
+  background:#ef4444;
+  color:white;
+}
+
+.success{
+  background:#16a34a;
+  color:white;
 }
 
 .hero{
-  min-height:520px;
-  padding:70px 7%;
+  min-height:470px;
+  padding:70px 6%;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:50px;
-  background:
-    radial-gradient(circle at 80% 20%,#dce3ff,transparent 35%),
-    #f5f7fb;
+  background:linear-gradient(135deg,#eef3ff,#ffffff);
 }
 
 .hero-text{
@@ -81,185 +94,102 @@ button{
 
 .hero h1{
   font-size:48px;
-  line-height:1.15;
   margin-bottom:20px;
 }
 
 .hero h1 span{
-  color:#4054d6;
+  color:#315bea;
 }
 
 .hero p{
-  font-size:19px;
-  color:#5c6475;
+  font-size:20px;
   line-height:1.8;
-  margin-bottom:30px;
-}
-
-.hero-btn{
-  background:#4054d6;
-  color:white;
-  padding:15px 25px;
-  border-radius:14px;
-  box-shadow:0 12px 25px #4054d640;
-}
-
-.book-scene{
-  width:320px;
-  height:300px;
-  perspective:1000px;
+  color:#58657a;
+  margin-bottom:25px;
 }
 
 .book{
-  width:250px;
-  height:170px;
-  position:relative;
-  margin:50px auto;
-  transform-style:preserve-3d;
-  transform:rotateX(15deg) rotateY(-25deg);
-  animation:float 4s ease-in-out infinite;
-}
-
-.book-cover{
-  position:absolute;
-  width:250px;
-  height:170px;
-  background:linear-gradient(135deg,#4054d6,#7b86ff);
-  border-radius:8px 18px 18px 8px;
-  box-shadow:20px 25px 40px #1113;
-}
-
-.book-page{
-  position:absolute;
-  width:235px;
-  height:155px;
-  background:#fff;
-  right:10px;
-  top:8px;
-  border-radius:5px 15px 15px 5px;
-}
-
-.book-title{
-  position:absolute;
-  z-index:5;
+  width:240px;
+  height:300px;
+  background:linear-gradient(135deg,#315bea,#7c3aed);
+  border-radius:15px 30px 30px 15px;
+  box-shadow:25px 30px 50px #17203355;
+  transform:rotateY(-20deg) rotateX(8deg) rotateZ(3deg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
   color:white;
-  font-size:24px;
+  font-size:30px;
   font-weight:bold;
-  top:65px;
-  left:45px;
+  animation:float 3s ease-in-out infinite;
 }
 
 @keyframes float{
-  0%,100%{transform:rotateX(15deg) rotateY(-25deg) translateY(0)}
-  50%{transform:rotateX(15deg) rotateY(-25deg) translateY(-18px)}
+  0%,100%{transform:rotateY(-20deg) rotateX(8deg) translateY(0)}
+  50%{transform:rotateY(-20deg) rotateX(8deg) translateY(-15px)}
 }
 
 section{
-  padding:70px 7%;
+  padding:60px 6%;
 }
 
 .section-title{
   text-align:center;
+  font-size:32px;
   margin-bottom:35px;
 }
 
-.section-title h2{
-  font-size:34px;
-  margin-bottom:10px;
-}
-
-.section-title p{
-  color:#707889;
-}
-
 .search{
-  max-width:600px;
-  margin:0 auto 35px;
-}
-
-.search input{
   width:100%;
-  padding:16px 20px;
+  max-width:700px;
+  display:block;
+  margin:0 auto 35px;
+  padding:17px 20px;
   border:1px solid #ddd;
   border-radius:15px;
-  font-size:16px;
+  font-size:17px;
   outline:none;
 }
 
 .courses{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:22px;
 }
 
-.course{
+.card{
   background:white;
+  border-radius:20px;
   padding:25px;
-  border-radius:22px;
-  box-shadow:0 10px 30px #20284a12;
+  box-shadow:0 10px 30px #17203312;
   transition:.3s;
-  border:1px solid #edf0f6;
 }
 
-.course:hover{
-  transform:translateY(-8px);
-  box-shadow:0 20px 40px #20284a20;
+.card:hover{
+  transform:translateY(-7px);
+  box-shadow:0 20px 40px #17203320;
 }
 
-.icon{
+.card-icon{
   font-size:45px;
   margin-bottom:15px;
 }
 
-.course h3{
+.card h3{
   font-size:22px;
   margin-bottom:10px;
 }
 
-.course p{
-  color:#6c7485;
+.card p{
+  color:#687386;
   line-height:1.7;
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
 
-.course button{
-  background:#eef0ff;
-  color:#3446c0;
-  padding:11px 17px;
-  border-radius:10px;
-}
-
-.features{
-  background:#171c3a;
-  color:white;
-}
-
-.feature-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:25px;
-}
-
-.feature{
-  background:#ffffff12;
-  padding:25px;
-  border-radius:18px;
-}
-
-.feature h3{
-  margin:12px 0;
-}
-
-.feature p{
-  color:#d5d8e7;
-  line-height:1.7;
-}
-
-footer{
-  background:#0e1227;
-  color:#cfd3e4;
+.empty{
   text-align:center;
-  padding:25px;
+  padding:50px;
+  color:#777;
 }
 
 .modal{
@@ -267,7 +197,7 @@ footer{
   position:fixed;
   inset:0;
   background:#0008;
-  z-index:200;
+  z-index:2000;
   align-items:center;
   justify-content:center;
   padding:20px;
@@ -275,53 +205,129 @@ footer{
 
 .modal-box{
   background:white;
-  width:min(600px,100%);
+  width:100%;
+  max-width:600px;
+  max-height:90vh;
+  overflow:auto;
   border-radius:22px;
   padding:30px;
-  position:relative;
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
 }
 
 .close{
-  position:absolute;
-  top:15px;
-  left:15px;
-  width:35px;
-  height:35px;
-  border-radius:50%;
   background:#eee;
+  font-size:20px;
 }
 
-.modal-box h2{
-  margin-bottom:15px;
+.form-group{
+  margin-bottom:18px;
 }
 
-.modal-box p{
-  color:#626b7d;
-  line-height:1.8;
+.form-group label{
+  display:block;
+  margin-bottom:7px;
+  font-weight:bold;
 }
 
-@media(max-width:800px){
-  header{
-    flex-wrap:wrap;
-  }
+.form-group input,
+.form-group textarea,
+.form-group select{
+  width:100%;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  font-size:16px;
+}
 
-  nav{
-    order:3;
-    width:100%;
-    justify-content:center;
-  }
+.form-group textarea{
+  min-height:110px;
+  resize:vertical;
+}
 
+.admin{
+  display:none;
+  padding:40px 6%;
+  background:#eef2ff;
+  min-height:500px;
+}
+
+.admin-box{
+  max-width:1000px;
+  margin:auto;
+}
+
+.admin-top{
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  margin-bottom:25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.admin-list{
+  display:grid;
+  gap:15px;
+}
+
+.admin-item{
+  background:white;
+  padding:20px;
+  border-radius:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+}
+
+.login{
+  display:none;
+}
+
+footer{
+  background:#172033;
+  color:white;
+  text-align:center;
+  padding:30px;
+}
+
+@media(max-width:700px){
   .hero{
     flex-direction:column;
     text-align:center;
+    padding-top:45px;
   }
 
   .hero h1{
-    font-size:36px;
+    font-size:35px;
   }
 
-  .book-scene{
-    transform:scale(.85);
+  .book{
+    width:190px;
+    height:240px;
+  }
+
+  header{
+    padding:15px 4%;
+  }
+
+  nav{
+    gap:5px;
   }
 }
 </style>
@@ -330,359 +336,781 @@ footer{
 <body>
 
 <header>
-  <div class="logo">🎓 منصتي التعليمية</div>
+  <div class="logo">📚 MyLearnSaudi</div>
 
   <nav>
-    <a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
-    <a href="#courses" data-ar="المقررات" data-en="Courses">المقررات</a>
-    <a href="#features" data-ar="المميزات" data-en="Features">المميزات</a>
-    <a onclick="openAbout()" data-ar="عن المنصة" data-en="About">عن المنصة</a>
+    <button class="nav-btn" onclick="scrollToCourses()">المواد</button>
+    <button class="nav-btn" onclick="showLogin()">لوحة التحكم</button>
+    <button class="nav-btn" onclick="toggleLanguage()">English</button>
   </nav>
-
-  <button class="lang-btn" onclick="changeLanguage()">English</button>
 </header>
 
-<main>
+<main id="studentSite">
 
-<section class="hero" id="home">
+<section class="hero">
+
   <div class="hero-text">
     <h1>
-      <span data-ar="تعلّم" data-en="Learn">تعلّم</span>
-      <span data-ar="بطريقة أفضل" data-en="Better">بطريقة أفضل</span>
+      تعلم بطريقة <span>أسهل</span>
     </h1>
 
-    <p
-      data-ar="منصة تعليمية حديثة تجمع المقررات والشروحات والمواد التعليمية في مكان واحد."
-      data-en="A modern educational platform that brings courses, explanations, and learning materials together in one place.">
-      منصة تعليمية حديثة تجمع المقررات والشروحات والمواد التعليمية في مكان واحد.
+    <p>
+      منصتك التعليمية للوصول إلى المواد والدروس والشروحات
+      بطريقة منظمة وسهلة.
     </p>
 
-    <button class="hero-btn"
-      onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})"
-      data-ar="استكشف المقررات"
-      data-en="Explore Courses">
-      استكشف المقررات
+    <button class="primary" onclick="scrollToCourses()">
+      🚀 ابدأ التعلم
     </button>
   </div>
 
-  <div class="book-scene">
-    <div class="book">
-      <div class="book-cover"></div>
-      <div class="book-page"></div>
-      <div class="book-title">LEARN</div>
-    </div>
+  <div class="book">
+    📖<br>
+    MyLearnSaudi
   </div>
+
 </section>
 
-<section id="courses">
+<section id="coursesSection">
 
-  <div class="section-title">
-    <h2 data-ar="المقررات التعليمية" data-en="Educational Courses">
-      المقررات التعليمية
-    </h2>
+  <h2 class="section-title">
+    📚 المواد التعليمية
+  </h2>
 
-    <p
-      data-ar="اختر المادة التي تريد البدء بتعلمها"
-      data-en="Choose the subject you want to start learning">
-      اختر المادة التي تريد البدء بتعلمها
-    </p>
+  <input
+    id="search"
+    class="search"
+    placeholder="🔎 ابحث عن مادة..."
+    oninput="searchCourses()"
+  >
+
+  <div id="courses" class="courses">
+    <div class="empty">
+      جاري تحميل المواد...
+    </div>
   </div>
 
-  <div class="search">
-    <input
-      id="searchInput"
-      type="text"
-      placeholder="ابحث عن مقرر..."
-      oninput="searchCourses()">
-  </div>
-
-  <div class="courses">
-
-    <div class="course" data-name="رياضيات Mathematics">
-      <div class="icon">📐</div>
-      <h3 data-ar="الرياضيات" data-en="Mathematics">الرياضيات</h3>
-      <p
-        data-ar="دروس وشروحات وتمارين لمساعدة الطالب على فهم الرياضيات."
-        data-en="Lessons, explanations, and exercises to help students understand mathematics.">
-        دروس وشروحات وتمارين لمساعدة الطالب على فهم الرياضيات.
-      </p>
-      <button onclick="openCourse('math')"
-        data-ar="عرض المقرر"
-        data-en="View Course">
-        عرض المقرر
-      </button>
-    </div>
-
-    <div class="course" data-name="علوم Science">
-      <div class="icon">🔬</div>
-      <h3 data-ar="العلوم" data-en="Science">العلوم</h3>
-      <p
-        data-ar="محتوى تعليمي مبسط مع أمثلة وتطبيقات."
-        data-en="Simple educational content with examples and applications.">
-        محتوى تعليمي مبسط مع أمثلة وتطبيقات.
-      </p>
-      <button onclick="openCourse('science')"
-        data-ar="عرض المقرر"
-        data-en="View Course">
-        عرض المقرر
-      </button>
-    </div>
-
-    <div class="course" data-name="حاسب Computer Science">
-      <div class="icon">💻</div>
-      <h3 data-ar="علوم الحاسب" data-en="Computer Science">علوم الحاسب</h3>
-      <p
-        data-ar="تعلم البرمجة ومفاهيم الحاسب بطريقة سهلة."
-        data-en="Learn programming and computer concepts in an easy way.">
-        تعلم البرمجة ومفاهيم الحاسب بطريقة سهلة.
-      </p>
-      <button onclick="openCourse('computer')"
-        data-ar="عرض المقرر"
-        data-en="View Course">
-        عرض المقرر
-      </button>
-    </div>
-
-    <div class="course" data-name="انجليزي English">
-      <div class="icon">🌍</div>
-      <h3 data-ar="اللغة الإنجليزية" data-en="English">اللغة الإنجليزية</h3>
-      <p
-        data-ar="دروس تساعدك على تطوير القراءة والكتابة والمفردات."
-        data-en="Lessons to improve reading, writing, and vocabulary.">
-        دروس تساعدك على تطوير القراءة والكتابة والمفردات.
-      </p>
-      <button onclick="openCourse('english')"
-        data-ar="عرض المقرر"
-        data-en="View Course">
-        عرض المقرر
-      </button>
-    </div>
-
-    <div class="course" data-name="كيمياء Chemistry">
-      <div class="icon">⚗️</div>
-      <h3 data-ar="الكيمياء" data-en="Chemistry">الكيمياء</h3>
-      <p
-        data-ar="شرح المفاهيم الأساسية في الكيمياء بطريقة واضحة."
-        data-en="Clear explanations of the basic concepts of chemistry.">
-        شرح المفاهيم الأساسية في الكيمياء بطريقة واضحة.
-      </p>
-      <button onclick="openCourse('chemistry')"
-        data-ar="عرض المقرر"
-        data-en="View Course">
-        عرض المقرر
-      </button>
-    </div>
-
-    <div class="course" data-name="جغرافيا Geography">
-      <div class="icon">🌎</div>
-      <h3 data-ar="الجغرافيا" data-en="Geography">الجغرافيا</h3>
-      <p
-        data-ar="تعرف على الخرائط والمناخ والمناطق الجغرافية."
-        data-en="Learn about maps, climate, and geographical regions.">
-        تعرف على الخرائط والمناخ والمناطق الجغرافية.
-      </p>
-      <button onclick="openCourse('geography')"
-        data-ar="عرض المقرر"
-        data-en="View Course">
-        عرض المقرر
-      </button>
-    </div>
-
-  </div>
-</section>
-
-<section class="features" id="features">
-
-  <div class="section-title">
-    <h2 data-ar="لماذا منصتنا؟" data-en="Why Our Platform?">
-      لماذا منصتنا؟
-    </h2>
-  </div>
-
-  <div class="feature-grid">
-
-    <div class="feature">
-      <div class="icon">📚</div>
-      <h3 data-ar="مقررات منظمة" data-en="Organized Courses">
-        مقررات منظمة
-      </h3>
-      <p
-        data-ar="الوصول إلى المواد التعليمية بطريقة مرتبة وسهلة."
-        data-en="Access learning materials in an organized and easy way.">
-        الوصول إلى المواد التعليمية بطريقة مرتبة وسهلة.
-      </p>
-    </div>
-
-    <div class="feature">
-      <div class="icon">🎥</div>
-      <h3 data-ar="شروحات" data-en="Explanations">
-        شروحات
-      </h3>
-      <p
-        data-ar="إمكانية إضافة فيديوهات وملفات وشروحات لكل درس."
-        data-en="Add videos, files, and explanations for every lesson.">
-        إمكانية إضافة فيديوهات وملفات وشروحات لكل درس.
-      </p>
-    </div>
-
-    <div class="feature">
-      <div class="icon">📝</div>
-      <h3 data-ar="اختبارات" data-en="Quizzes">
-        اختبارات
-      </h3>
-      <p
-        data-ar="اختبارات قصيرة لمساعدة الطالب على قياس مدى فهمه."
-        data-en="Short quizzes to help students measure their understanding.">
-        اختبارات قصيرة لمساعدة الطالب على قياس مدى فهمه.
-      </p>
-    </div>
-
-  </div>
 </section>
 
 </main>
 
-<footer>
-  <p data-ar="© 2026 منصتي التعليمية - جميع الحقوق محفوظة"
-     data-en="© 2026 Educational Platform - All Rights Reserved">
-     © 2026 منصتي التعليمية - جميع الحقوق محفوظة
-  </p>
-</footer>
+<!-- تسجيل الدخول -->
 
-<div class="modal" id="modal">
+<div id="loginModal" class="modal">
+
   <div class="modal-box">
-    <button class="close" onclick="closeModal()">×</button>
-    <h2 id="modalTitle"></h2>
-    <p id="modalText"></p>
+
+    <div class="modal-head">
+      <h2>🔐 دخول لوحة التحكم</h2>
+
+      <button class="close" onclick="closeModal('loginModal')">
+        ×
+      </button>
+    </div>
+
+    <div class="form-group">
+      <label>البريد الإلكتروني</label>
+      <input id="email" type="email">
+    </div>
+
+    <div class="form-group">
+      <label>كلمة المرور</label>
+      <input id="password" type="password">
+    </div>
+
+    <button class="primary" onclick="login()">
+      دخول
+    </button>
+
+    <p id="loginMessage" style="margin-top:15px"></p>
+
   </div>
+
 </div>
+
+<!-- لوحة التحكم -->
+
+<section id="adminPanel" class="admin">
+
+  <div class="admin-box">
+
+    <div class="admin-top">
+
+      <div>
+        <h2>⚙️ لوحة التحكم</h2>
+        <p>تحكم كامل بالمحتوى</p>
+      </div>
+
+      <div>
+        <button class="success" onclick="openAddSubject()">
+          ➕ إضافة مادة
+        </button>
+
+        <button class="danger" onclick="logout()">
+          تسجيل خروج
+        </button>
+      </div>
+
+    </div>
+
+    <div id="adminList" class="admin-list">
+      جاري التحميل...
+    </div>
+
+  </div>
+
+</section>
+
+<!-- إضافة / تعديل مادة -->
+
+<div id="subjectModal" class="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <h2 id="subjectModalTitle">
+        ➕ إضافة مادة
+      </h2>
+
+      <button
+        class="close"
+        onclick="closeModal('subjectModal')">
+        ×
+      </button>
+
+    </div>
+
+    <input type="hidden" id="subjectId">
+
+    <div class="form-group">
+      <label>اسم المادة بالعربي</label>
+      <input id="nameAr" placeholder="مثال: الرياضيات">
+    </div>
+
+    <div class="form-group">
+      <label>اسم المادة بالإنجليزي</label>
+      <input id="nameEn" placeholder="Example: Mathematics">
+    </div>
+
+    <div class="form-group">
+      <label>وصف المادة بالعربي</label>
+      <textarea id="descriptionAr"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>وصف المادة بالإنجليزي</label>
+      <textarea id="descriptionEn"></textarea>
+    </div>
+
+    <button class="primary" onclick="saveSubject()">
+      💾 حفظ المادة
+    </button>
+
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 MyLearnSaudi - جميع الحقوق محفوظة</p>
+</footer>
 
 <script>
 
-let currentLang = "ar";
+/* =====================================
+   إعداد Supabase
+===================================== */
 
-function changeLanguage(){
+const SUPABASE_URL = "https://zvxcdjtmrwjtxwdydxmv.supabase.co";
 
-  currentLang = currentLang === "ar" ? "en" : "ar";
+const SUPABASE_KEY = "sb_publishable_2YaZJQR3S3AfXIlA52dYMg__91CLvu4";
 
-  document.documentElement.lang = currentLang;
-  document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
-  document.querySelector(".lang-btn").textContent =
-    currentLang === "ar" ? "English" : "العربية";
 
-  document.querySelectorAll("[data-ar]").forEach(el=>{
-    el.textContent = el.getAttribute("data-" + currentLang);
-  });
+/* =====================================
+   اللغة
+===================================== */
 
-  const search = document.getElementById("searchInput");
+let currentLanguage = "ar";
 
-  search.placeholder =
-    currentLang === "ar"
-    ? "ابحث عن مقرر..."
-    : "Search for a course...";
+function toggleLanguage(){
+
+  currentLanguage =
+    currentLanguage === "ar"
+      ? "en"
+      : "ar";
+
+  document.documentElement.lang =
+    currentLanguage;
+
+  document.documentElement.dir =
+    currentLanguage === "ar"
+      ? "rtl"
+      : "ltr";
+
+  renderCourses();
 }
 
-function openCourse(course){
 
-  const data = {
+/* =====================================
+   المواد
+===================================== */
 
-    math:{
-      arTitle:"الرياضيات",
-      enTitle:"Mathematics",
-      arText:"هنا ستكون وحدات ودروس الرياضيات. يمكننا لاحقًا إضافة الفيديوهات والملفات والاختبارات.",
-      enText:"Mathematics units and lessons will appear here. We can later add videos, files, and quizzes."
-    },
+let subjects = [];
 
-    science:{
-      arTitle:"العلوم",
-      enTitle:"Science",
-      arText:"هنا ستكون وحدات ودروس العلوم.",
-      enText:"Science units and lessons will appear here."
-    },
+async function loadSubjects(){
 
-    computer:{
-      arTitle:"علوم الحاسب",
-      enTitle:"Computer Science",
-      arText:"هنا ستكون دروس البرمجة وعلوم الحاسب.",
-      enText:"Programming and computer science lessons will appear here."
-    },
+  const { data, error } =
+    await supabaseClient
+      .from("subjects")
+      .select("*")
+      .order("id", { ascending:true });
 
-    english:{
-      arTitle:"اللغة الإنجليزية",
-      enTitle:"English",
-      arText:"هنا ستكون دروس اللغة الإنجليزية.",
-      enText:"English language lessons will appear here."
-    },
+  if(error){
 
-    chemistry:{
-      arTitle:"الكيمياء",
-      enTitle:"Chemistry",
-      arText:"هنا ستكون دروس الكيمياء.",
-      enText:"Chemistry lessons will appear here."
-    },
+    console.error(error);
 
-    geography:{
-      arTitle:"الجغرافيا",
-      enTitle:"Geography",
-      arText:"هنا ستكون دروس الجغرافيا.",
-      enText:"Geography lessons will appear here."
-    }
+    document.getElementById("courses").innerHTML =
+      `
+      <div class="empty">
+        ⚠️ لم يتم الاتصال بقاعدة البيانات.
+      </div>
+      `;
 
-  };
-
-  const item = data[course];
-
-  document.getElementById("modalTitle").textContent =
-    currentLang === "ar" ? item.arTitle : item.enTitle;
-
-  document.getElementById("modalText").textContent =
-    currentLang === "ar" ? item.arText : item.enText;
-
-  document.getElementById("modal").style.display="flex";
-}
-
-function openAbout(){
-
-  document.getElementById("modalTitle").textContent =
-    currentLang === "ar"
-    ? "عن المنصة"
-    : "About the Platform";
-
-  document.getElementById("modalText").textContent =
-    currentLang === "ar"
-    ? "منصة تعليمية تهدف إلى تنظيم المقررات والشروحات والاختبارات في مكان واحد."
-    : "An educational platform designed to organize courses, explanations, and quizzes in one place.";
-
-  document.getElementById("modal").style.display="flex";
-}
-
-function closeModal(){
-  document.getElementById("modal").style.display="none";
-}
-
-window.onclick=function(e){
-  if(e.target === document.getElementById("modal")){
-    closeModal();
+    return;
   }
+
+  subjects = data || [];
+
+  renderCourses();
 }
+
+
+function renderCourses(){
+
+  const container =
+    document.getElementById("courses");
+
+  if(subjects.length === 0){
+
+    container.innerHTML =
+      `
+      <div class="empty">
+        لا توجد مواد حالياً.
+      </div>
+      `;
+
+    return;
+  }
+
+  container.innerHTML =
+    subjects.map(subject => {
+
+      const name =
+        currentLanguage === "ar"
+          ? subject.name_ar
+          : subject.name_en;
+
+      const description =
+        currentLanguage === "ar"
+          ? subject.description_ar
+          : subject.description_en;
+
+      return `
+        <div class="card">
+
+          <div class="card-icon">
+            📚
+          </div>
+
+          <h3>${escapeHtml(name)}</h3>
+
+          <p>
+            ${escapeHtml(description || "")}
+          </p>
+
+          <button
+            class="primary"
+            onclick="openSubject(${subject.id})">
+            عرض المادة
+          </button>
+
+        </div>
+      `;
+
+    }).join("");
+}
+
+
+/* =====================================
+   البحث
+===================================== */
 
 function searchCourses(){
 
   const value =
-    document.getElementById("searchInput").value.toLowerCase();
+    document
+      .getElementById("search")
+      .value
+      .toLowerCase();
 
-  document.querySelectorAll(".course").forEach(course=>{
+  const filtered =
+    subjects.filter(subject => {
 
-    const name = course.getAttribute("data-name").toLowerCase();
+      return (
+        subject.name_ar?.toLowerCase().includes(value) ||
+        subject.name_en?.toLowerCase().includes(value)
+      );
 
-    course.style.display =
-      name.includes(value) ? "block" : "none";
+    });
 
-  });
+  const container =
+    document.getElementById("courses");
+
+  container.innerHTML =
+    filtered.map(subject => {
+
+      const name =
+        currentLanguage === "ar"
+          ? subject.name_ar
+          : subject.name_en;
+
+      const description =
+        currentLanguage === "ar"
+          ? subject.description_ar
+          : subject.description_en;
+
+      return `
+        <div class="card">
+
+          <div class="card-icon">📚</div>
+
+          <h3>${escapeHtml(name)}</h3>
+
+          <p>${escapeHtml(description || "")}</p>
+
+          <button
+            class="primary"
+            onclick="openSubject(${subject.id})">
+            عرض المادة
+          </button>
+
+        </div>
+      `;
+
+    }).join("");
 }
+
+
+/* =====================================
+   تسجيل الدخول
+===================================== */
+
+function showLogin(){
+
+  document.getElementById("loginModal")
+    .style.display = "flex";
+
+}
+
+async function login(){
+
+  const email =
+    document.getElementById("email").value;
+
+  const password =
+    document.getElementById("password").value;
+
+  const message =
+    document.getElementById("loginMessage");
+
+  const { data, error } =
+    await supabaseClient.auth.signInWithPassword({
+      email,
+      password
+    });
+
+  if(error){
+
+    message.style.color = "red";
+    message.textContent =
+      "❌ بيانات الدخول غير صحيحة";
+
+    return;
+  }
+
+  closeModal("loginModal");
+
+  showAdmin();
+
+}
+
+
+/* =====================================
+   لوحة التحكم
+===================================== */
+
+async function showAdmin(){
+
+  document.getElementById("studentSite")
+    .style.display = "none";
+
+  document.getElementById("adminPanel")
+    .style.display = "block";
+
+  await loadAdminSubjects();
+
+}
+
+
+async function loadAdminSubjects(){
+
+  const { data, error } =
+    await supabaseClient
+      .from("subjects")
+      .select("*")
+      .order("id");
+
+  if(error){
+
+    document.getElementById("adminList").innerHTML =
+      "حدث خطأ في تحميل المواد";
+
+    return;
+  }
+
+  const list =
+    document.getElementById("adminList");
+
+  if(!data || data.length === 0){
+
+    list.innerHTML =
+      `
+      <div class="admin-item">
+        لا توجد مواد. أضف أول مادة الآن.
+      </div>
+      `;
+
+    return;
+  }
+
+  list.innerHTML =
+    data.map(subject => {
+
+      return `
+        <div class="admin-item">
+
+          <div>
+            <strong>
+              ${escapeHtml(subject.name_ar)}
+            </strong>
+
+            <p>
+              ${escapeHtml(subject.name_en)}
+            </p>
+          </div>
+
+          <div class="actions">
+
+            <button
+              class="primary"
+              onclick="editSubject(${subject.id})">
+              ✏️ تعديل
+            </button>
+
+            <button
+              class="danger"
+              onclick="deleteSubject(${subject.id})">
+              🗑️ حذف
+            </button>
+
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
+}
+
+
+/* =====================================
+   إضافة مادة
+===================================== */
+
+function openAddSubject(){
+
+  document.getElementById("subjectModalTitle")
+    .textContent = "➕ إضافة مادة";
+
+  document.getElementById("subjectId").value = "";
+
+  document.getElementById("nameAr").value = "";
+
+  document.getElementById("nameEn").value = "";
+
+  document.getElementById("descriptionAr").value = "";
+
+  document.getElementById("descriptionEn").value = "";
+
+  document.getElementById("subjectModal")
+    .style.display = "flex";
+}
+
+
+/* =====================================
+   تعديل مادة
+===================================== */
+
+async function editSubject(id){
+
+  const subject =
+    subjects.find(s => s.id === id);
+
+  let current = subject;
+
+  if(!current){
+
+    const { data } =
+      await supabaseClient
+        .from("subjects")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+    current = data;
+  }
+
+  if(!current) return;
+
+  document.getElementById("subjectModalTitle")
+    .textContent = "✏️ تعديل المادة";
+
+  document.getElementById("subjectId").value =
+    current.id;
+
+  document.getElementById("nameAr").value =
+    current.name_ar || "";
+
+  document.getElementById("nameEn").value =
+    current.name_en || "";
+
+  document.getElementById("descriptionAr").value =
+    current.description_ar || "";
+
+  document.getElementById("descriptionEn").value =
+    current.description_en || "";
+
+  document.getElementById("subjectModal")
+    .style.display = "flex";
+}
+
+
+/* =====================================
+   حفظ المادة
+===================================== */
+
+async function saveSubject(){
+
+  const id =
+    document.getElementById("subjectId").value;
+
+  const name_ar =
+    document.getElementById("nameAr").value.trim();
+
+  const name_en =
+    document.getElementById("nameEn").value.trim();
+
+  const description_ar =
+    document.getElementById("descriptionAr").value.trim();
+
+  const description_en =
+    document.getElementById("descriptionEn").value.trim();
+
+  if(!name_ar || !name_en){
+
+    alert("اكتب اسم المادة بالعربي والإنجليزي");
+
+    return;
+  }
+
+  let result;
+
+  if(id){
+
+    result =
+      await supabaseClient
+        .from("subjects")
+        .update({
+          name_ar,
+          name_en,
+          description_ar,
+          description_en
+        })
+        .eq("id", id);
+
+  }else{
+
+    result =
+      await supabaseClient
+        .from("subjects")
+        .insert({
+          name_ar,
+          name_en,
+          description_ar,
+          description_en
+        });
+
+  }
+
+  if(result.error){
+
+    alert(
+      "حدث خطأ: " +
+      result.error.message
+    );
+
+    return;
+  }
+
+  closeModal("subjectModal");
+
+  await loadSubjects();
+
+  await loadAdminSubjects();
+
+  alert("✅ تم حفظ المادة");
+
+}
+
+
+/* =====================================
+   حذف مادة
+===================================== */
+
+async function deleteSubject(id){
+
+  const ok =
+    confirm(
+      "هل أنت متأكد من حذف هذه المادة؟"
+    );
+
+  if(!ok) return;
+
+  const { error } =
+    await supabaseClient
+      .from("subjects")
+      .delete()
+      .eq("id", id);
+
+  if(error){
+
+    alert(
+      "❌ لم يتم الحذف: " +
+      error.message
+    );
+
+    return;
+  }
+
+  await loadSubjects();
+
+  await loadAdminSubjects();
+
+  alert("✅ تم حذف المادة");
+
+}
+
+
+/* =====================================
+   فتح المادة
+===================================== */
+
+function openSubject(id){
+
+  const subject =
+    subjects.find(s => s.id === id);
+
+  if(!subject) return;
+
+  const name =
+    currentLanguage === "ar"
+      ? subject.name_ar
+      : subject.name_en;
+
+  const description =
+    currentLanguage === "ar"
+      ? subject.description_ar
+      : subject.description_en;
+
+  alert(
+    name +
+    "\n\n" +
+    (description || "")
+  );
+
+}
+
+
+/* =====================================
+   تسجيل الخروج
+===================================== */
+
+async function logout(){
+
+  await supabaseClient.auth.signOut();
+
+  document.getElementById("adminPanel")
+    .style.display = "none";
+
+  document.getElementById("studentSite")
+    .style.display = "block";
+
+}
+
+
+/* =====================================
+   أدوات
+===================================== */
+
+function closeModal(id){
+
+  document.getElementById(id)
+    .style.display = "none";
+
+}
+
+function scrollToCourses(){
+
+  document.getElementById("coursesSection")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+function escapeHtml(text){
+
+  const div =
+    document.createElement("div");
+
+  div.textContent = text ?? "";
+
+  return div.innerHTML;
+}
+
+
+/* =====================================
+   التشغيل
+===================================== */
+
+loadSubjects();
 
 </script>
 
 </body>
-  </html>
+</html>
